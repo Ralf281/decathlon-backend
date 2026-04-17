@@ -19,14 +19,15 @@ public class AthleteController {
             @RequestParam(required = false) String country,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "points") String sortBy
+            @RequestParam(defaultValue = "points") String sortBy,
+            @RequestParam(defaultValue = "desc") String order
     ) {
 
-        Pageable pageable = PageRequest.of(
-                page,
-                size,
-                Sort.by(sortBy).descending()
-        );
+        Sort sort = order.equalsIgnoreCase("asc")
+                ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
 
         return service.getAthletes(country, pageable);
     }

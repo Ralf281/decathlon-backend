@@ -1,13 +1,13 @@
 package ee.ralf.decathlon_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import ee.ralf.decathlon_backend.entity.Result;
 
+import java.util.List;
+
+@Data
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Athlete {
 
     @Id
@@ -17,6 +17,8 @@ public class Athlete {
     private String name;
     private String country;
 
-    // lihtsuse mõttes kogupunktid
     private int points;
+
+    @OneToMany(mappedBy = "athlete")
+    private List<Result> results;
 }

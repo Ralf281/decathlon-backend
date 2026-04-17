@@ -14,7 +14,6 @@ public class AthleteService {
         this.repository = repository;
     }
 
-    // 🔥 SEE ON PUUDUV MEETOD (controller kasutab seda)
     public Page<Athlete> getAthletes(String country, Pageable pageable) {
 
         if (country != null && !country.isEmpty()) {
